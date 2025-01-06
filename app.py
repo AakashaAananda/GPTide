@@ -8,7 +8,7 @@ from markupsafe import Markup
 
 app = Flask(__name__)
 app.secret_key = ''# Add any AI model API key
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///chatbot.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///gptide.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # AI model
