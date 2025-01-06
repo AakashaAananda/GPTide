@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Prompt</title>
+    <style>
+        body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #33417c, #000000);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+h1 {
+    margin-bottom: 50px;
+}
+
+textarea, input[type="text"] {
+    width: 200%;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    resize: vertical;
+    outline: none;
+    text-align: center;
+}
+
+button {
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #2c7ff4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #009acd;
+}
+
+.error {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(248, 215, 218, 0.9);
+    border-radius: 5px;
+    color: #721c24;
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+}
+
+a {
+    color: #00bfff;
+    text-decoration: none;
+    margin-top: 20px;
+    display: inline-block;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #009acd;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Edit Prompt</h1>
+    {% if error %}
+        <div class="error">
+            <p><strong>Error:</strong> {{ error }}</p>
+        </div>
+    {% endif %}
+
+    <form method="POST">
+        <label for="query">User Prompt:</label><br>
+        <textarea id="query" name="query" rows="4">{{ query.user_query }}</textarea><br><br>
+
+        <label for="response">GPTide Response:</label><br>
+        <textarea id="response" name="response" rows="4" readonly>{{ query.bot_response }}</textarea><br><br>
+
+        <button type="submit">Update</button>
+    </form>
+
+    <a href="/history">Back to History</a>
+</body>
+</html>

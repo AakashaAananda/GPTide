@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPTide - Chat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #33417c, #000000);
+            color: #fff;
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .sidebar h2 {
+            color: #00bfff;
+            margin-bottom: 20px;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            margin: 10px 0;
+            transition: color 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: #00bfff;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .response-container {
+            width: 80%;
+            max-height: 300px;
+            overflow-y: auto;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+
+        .response-container h2 {
+            margin: 0 0 10px 0;
+        }
+
+        .response {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+            word-wrap: break-word;
+        }
+
+        .search-container {
+            position: relative;
+            width: 80%;
+            transition: transform 0.3s ease;
+            max-height: 300px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 60px;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            resize: none;
+            outline: none;
+        }
+
+        button {
+            background-color: #2c7ff4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #009acd;
+        }
+
+        .navigation {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .navigation a {
+            color: #00bfff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .navigation a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function moveSearchBar() {
+            const searchContainer = document.querySelector('.search-container');
+            searchContainer.style.transform = 'translateY(50px)';
+        }
+    </script>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Navigation</h2>
+        <br>
+        <br>
+        <a href="/chat">New Chat</a><br>
+        <a href="/history">Chat History</a><br>
+        <a href="/logout">Logout</a><br>
+    </div>
+    <div class="main-content">
+        <h1>GPTide</h1>
+        <div class="response-container">
+            {% if response %}
+                <h2>GPTide Response:</h2>
+                <div class="response">{{ response|safe }}</div>
+            {% elif error %}
+            <div class="error">
+                <p><strong>Error:</strong> {{ error }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="search-container">
+        <form method="POST" onsubmit="moveSearchBar()">
+            <textarea name="query" placeholder="Ask GPTide?" required></textarea><br>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <div class="navigation">
+    </div>
+</body>
+</html>
